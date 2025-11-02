@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="openDialog">Join Us</button>
+
+    <div id="myDialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close">&times;</span>
+            <h2>JOIN US</h2>
+
+            <button id="openDialog1">Sign In</button>
+            <button id="openDialog2">Sign Up</button>
+        </div>
+    </div>
+
+    <div id="dialog1" class="dialog">
+        <div class="dialog-content">
+            <span class="close">&times;</span>
+            <h2>SIGN IN</h2>
+            <form Action="" method="post" class="form3">
+
+                <label for="in_name" id="label_name">Name </label>
+                <input type="text" name="in_name" id="in_input" placeholder="Enter your Name"><br>
+        
+                <label id="label_name">Password </label> 
+                <input type="password" name="in_pass" id="show" placeholder="Enter the Password">
+                    <br>
+        
+                    <button id="btn" type="button" onclick="showtext()" name="Show">Show</button> 
+                    <br>
+                    <br>
+                <input id="sub_btn" type="submit" value="Verify">
+                </form>
+
+            <button id="openDialog2FromDialog1">Switch to Sign Up</button>
+        </div>
+    </div>
+
+    <div id="dialog2" class="dialog">
+        <div class="dialog-content">
+            <span class="close">&times;</span>
+            <h2>SIGN UP</h2>
+            <form Action="" method="post" class="form3">
+
+                <label for="in_name" id="label_name">Email</label>
+                <input type="text" name="in_name" id="in_input" placeholder="Enter your Email"><br>
+
+                <label for="in_name" id="label_name">Name </label>
+                <input type="text" name="in_name" id="in_input" placeholder="Enter your Name"><br>
+        
+                <label id="label_name">Password </label> 
+                <input type="password" name="in_pass" id="show" placeholder="Enter the Password">
+                    <br>
+        
+                    <button id="btn" type="button" onclick="showtext1()" name="Show">Show</button> 
+                    <br>
+                    <br>
+                <input id="sub_btn" type="submit" value="Verify">
+            </form>
+            <button id="openDialog1FromDialog2">Switch to Sign In</button>
+        </div>
+    </div>
+
+    <script>
+
+function setupDialog(openButtonId, dialogId) {
+    const openButton = document.getElementById(openButtonId);
+    const dialog = document.getElementById(dialogId);
+    const closeButton = dialog.getElementsByClassName("close")[0];
+
+    openButton.onclick = function() {
+        openDialog(dialogId);
+    }
+
+    closeButton.onclick = function() {
+        closeDialog(dialogId);
+    }
+
+    window.onclick = function(event) {
+        if (event.target == dialog) {
+            closeDialog(dialogId);
+        }
+    }
+}
+
+function openDialog(dialogId) {
+    document.getElementById(dialogId).classList.add("show");
+}
+
+function closeDialog(dialogId) {
+    document.getElementById(dialogId).classList.remove("show");
+}
+
+// Setup main dialog
+setupDialog("openDialog", "myDialog");
+
+// Setup Dialog 1
+setupDialog("openDialog1", "dialog1");
+
+// Setup Dialog 2
+setupDialog("openDialog2", "dialog2");
+
+// Setup inter-dialog buttons
+document.getElementById("openDialog2FromDialog1").onclick = function() {
+    closeDialog("dialog1");
+    openDialog("dialog2");
+}
+
+document.getElementById("openDialog1FromDialog2").onclick = function() {
+    closeDialog("dialog2");
+    openDialog("dialog1");
+}
+
+// Setup buttons in the main dialog to open Dialog 1 and Dialog 2
+document.getElementById("openDialog1").onclick = function() {
+    closeDialog("myDialog");
+    openDialog("dialog1");
+}
+
+document.getElementById("openDialog2").onclick = function() {
+    closeDialog("myDialog");
+    openDialog("dialog2");
+}
+
+
+// Show Pass Word
+
+function showtext(){
+    var showpass=document.getElementById("show");
+
+    if(showpass){
+        if(showpass.type==="password")
+        {
+            showpass.type="text;";
+        }
+        else{
+            showpass.type="password";
+        }
+    }
+    else{
+        console.log(" 'show' id not found");
+    }
+}
+
+
+
+    </script>
+</body>
+</html>
